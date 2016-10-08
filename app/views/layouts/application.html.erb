@@ -15,7 +15,7 @@
     <li><%= link_to "サインアップ", new_user_registration_path %></li>
     <% end %>
   </header>
-
+  <li><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
 
 <%= yield %>
 

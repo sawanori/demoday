@@ -1,0 +1,26 @@
+<section id="user-detail" class="scroll-page bg-white">
+  <div class="page-header">
+    <h2>マイページ</h2>
+  </div>
+  <table>
+
+    <tr>
+      <th>お名前</th>
+      <td><%= current_user.name %></td>
+      <div class="thumbnail">
+       <%= image_tag current_user.avatar_url %>
+      </div>
+
+    </tr>
+  </table>
+</section>
+
+<h2>フォロワー</h2>
+<% @users.each do |user| %>
+<div class="thumbnail">
+ <%= image_tag user.avatar_url %>
+</div>
+<%= user.name %>
+<%= render 'follow_form', user: user %>
+
+<% end %>
