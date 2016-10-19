@@ -11,6 +11,8 @@ class SpotsController < ApplicationController
   # GET /spots/1
   # GET /spots/1.json
   def show
+   @user = current_user
+   @postarticles = Postarticle.all
   end
 
   # GET /spots/new
@@ -70,6 +72,6 @@ class SpotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spot_params
-      params.require(:spot).permit(:title, :description, :charge, :place, :phone, :user_id)
+      params.require(:spot).permit(:title, :description, :charge, :place, :phone, :user_id, :image, :image_cache, :remove_image)
     end
 end

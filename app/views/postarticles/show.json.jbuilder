@@ -1,0 +1,1 @@
+json.partial! "postarticles/postarticle", postarticle: @postarticle

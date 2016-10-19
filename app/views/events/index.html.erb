@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>寺で一緒に修行しよう</h1>
+<%= link_to 'イベントを作成', new_event_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>修行テーマ</th>
+      <th>説明</th>
+      <th>料金</th>
+      <th>定員</th>
+      <th>作成者</th>
+      <th>場所</th>
+      <th>日時</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= image_tag event.event_image.url %></td>
+        <td><%= event.event_title %></td>
+        <td><%= event.event_content %></td>
+        <td><%= event.event_charge %></td>
+        <td><%= event.member_count %></td>
+        <td><%= event.user.name %></td>
+        <td><%= event.spot %></td>
+        <td><%= event.event_day %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

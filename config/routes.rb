@@ -3,6 +3,15 @@ Rails.application.routes.draw do
 
 
 
+
+  resources :events do
+    resources :tickets
+    resources :comments
+  end
+  resources :postarticles do
+    member {patch "like", "unlike"}
+    collection {get "voted"}
+  end
   get 'accounts/show'
 
   get 'accounts/edit'
@@ -18,7 +27,9 @@ Rails.application.routes.draw do
   }
   root 'home#index'
   resources :users, only:[:index]
-  resources :spots
+  resources :spots do
+   resources :postarticles
+  end
   resources :relationships, only:[:create, :destroy]
   resources :account, only: [:show, :edit, :update]
   get 'inquiry' => 'inquiry#index'

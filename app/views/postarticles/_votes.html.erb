@@ -1,0 +1,6 @@
+<p class="vote">
+
+  <% if current_user && current_user.votable_for?(@user) %>
+   <%= link_to "⭐︎いいね", [:like, @postarticle], method: :patch, class: "button" %>
+  <% end %>
+</p>

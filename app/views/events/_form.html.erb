@@ -1,0 +1,67 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% if @event.event_image? %>
+     <div class="thumbnail">
+       <%= event_image_tag @event.event_image.url %>
+     </div>
+    <% end %><br>
+    <%= f.label :event_image %><br>
+    <%= f.file_field :event_image %>
+    <%= f.hidden_field :event_image_cache %>
+  </div>
+  <div class="field">
+    <% if @event.persisted? && @event.image %>
+     <label>
+       <%= f.check_box :remove_event_image %>
+     </label>
+    <% end %>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="field">
+    <%= f.label :修行テーマ %><br>
+    <%= f.text_field :event_title %>
+  </div>
+  <div class="field">
+    <%= f.label :説明 %><br>
+    <%= f.text_area :event_content %>
+  </div>
+  <div class="field">
+    <%= f.label :料金 %><br>
+    <%= f.number_field :event_charge %>
+  </div>
+  <div class="field">
+    <%= f.label :定員 %><br>
+    <%= f.number_field :member_count %>
+  </div>
+
+  <div class="field">
+    <%= f.label :作成者 %><br>
+    <%= f.text_field :spot_id %>
+  </div>
+  <div class="field">
+    <%= f.label :日時 %><br>
+    <%= f.date_select :event_day %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

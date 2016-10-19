@@ -1,4 +1,13 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <strong>Image</strong>
+  <% if @spot.image? %>
+   <div class="thumbnail">
+     <%= image_tag @spot.image.url %>
+   </div>
+  <% end %>
+</p>
+
 
 <p>
   <strong>Title:</strong>
@@ -24,11 +33,8 @@
   <strong>Phone:</strong>
   <%= @spot.phone %>
 </p>
+<%= link_to "体験談を説法する", new_spot_postarticle_path(@spot) %>
+<%= render "postarticles/index" %>
 
-<p>
-  <strong>User:</strong>
-  <%= @spot.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_spot_path(@spot) %> |
+<%= link_to 'Edit', edit_spot_path(@spot,@user) %> |
 <%= link_to 'Back', spots_path %>

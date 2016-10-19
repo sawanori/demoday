@@ -11,15 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008172646) do
+ActiveRecord::Schema.define(version: 20161019090541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "comments", ["event_id"], name: "index_comments_on_event_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.string   "event_title"
+    t.text     "event_content"
+    t.integer  "event_charge"
+    t.integer  "member_count"
+    t.integer  "user_id"
+    t.integer  "spot_id"
+    t.date     "event_day"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "event_image"
+  end
+
+  add_index "events", ["spot_id"], name: "index_events_on_spot_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "inquiries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "postarticles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "spot_id"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "postarticles", ["spot_id"], name: "index_postarticles_on_spot_id", using: :btree
+  add_index "postarticles", ["user_id"], name: "index_postarticles_on_user_id", using: :btree
 
   create_table "relationships", force: :cascade do |t|
     t.integer  "follower_id"
@@ -38,10 +77,23 @@ ActiveRecord::Schema.define(version: 20161008172646) do
     t.integer  "charge",                   null: false
     t.text     "place",       default: "", null: false
     t.integer  "phone",                    null: false
-    t.integer  "user_id",                  null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "image"
   end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "event_id",   null: false
+    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tickets", ["event_id", "user_id"], name: "index_tickets_on_event_id_and_user_id", unique: true, using: :btree
+  add_index "tickets", ["event_id"], name: "index_tickets_on_event_id", using: :btree
+  add_index "tickets", ["user_id", "event_id"], name: "index_tickets_on_user_id_and_event_id", unique: true, using: :btree
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -71,4 +123,22 @@ ActiveRecord::Schema.define(version: 20161008172646) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "postarticle_id", null: false
+    t.integer  "user_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "votes", ["postarticle_id"], name: "index_votes_on_postarticle_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+
+  add_foreign_key "comments", "events"
+  add_foreign_key "comments", "users"
+  add_foreign_key "events", "spots"
+  add_foreign_key "events", "users"
+  add_foreign_key "postarticles", "spots"
+  add_foreign_key "postarticles", "users"
+  add_foreign_key "tickets", "events"
+  add_foreign_key "tickets", "users"
 end
