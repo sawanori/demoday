@@ -24,7 +24,7 @@
 
 <p>
   <strong>作成者:</strong>
-  <%= @event.user %>
+  <%= @event.user.name %>
 </p>
 
 <p>
@@ -36,17 +36,22 @@
   <strong>日時:</strong>
   <%= @event.event_day %>
 </p>
-<% if user_signed_in? %>
+<% if @ticket %>
+ <%= link_to '参加をキャンセルする', event_ticket_path(@event, @ticket), method: :delete,
+ class: 'btn btn-warning btn-lg btn-block' %>
+<% elsif user_signed_in? %>
+  <%= form_for(@event.tickets.build, url: event_tickets_path(@event), remote: true) do |f| %>
+  <div>
+     <%= f.button '参加する', class: 'btn btn-primary btn-lg btn-block' %>
+   </div>
+  <% end %>
 
- <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#createTicket">
-   参加する
- </button>
-
-<% else %>
-<%= link_to '参加する', new_event_ticket_path(@event), class: "btn btn-primary btn-lg btn-block" %>
 <% end %>
-
-
+<h3>参加者</h3>
+<% @tickets.each do |ticket| %>
+ <%= ticket.user.name %>
+ 
+<% end %>
 
 <h3>連絡掲示板</h3>
 <%= render partial: 'comments/form', locals: {comment: @comment, event: @event} %>

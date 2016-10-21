@@ -3,5 +3,5 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :spot
   has_many :comments, dependent: :destroy
-  has_many :tickets
+  has_many :tickets, dependent: :destroy
 end
