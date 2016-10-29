@@ -9,10 +9,13 @@
 <body>
   <header>
     <ul>
-
-      <li><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
-      <li><%= link_to 'スポット', spots_path %></li>
+      <!-- <li><%= link_to image_tag('teralogo.png'), root_path  %></li> -->
+      <li><%= image_tag 'teralogo.png' %></li>
+      <li><%= link_to 'スポット検索', spots_path %></li>
       <li><%= link_to 'イベント', events_path %></li>
+      <li><%= link_to 'ユーザー一覧', users_path if user_signed_in? %></li>
+
+
 
 
       <li>
@@ -27,7 +30,12 @@
 
 
   </header>
+<div id="main">
 <%= yield %>
+</div>
+<footer>
+  <p>&copy; teraview? 2016</p>
+</footer>
 
 </body>
 </html>
