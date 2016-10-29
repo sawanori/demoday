@@ -10,6 +10,7 @@ class PostarticlesController < ApplicationController
   # GET /postarticles/1
   # GET /postarticles/1.json
   def show
+  
   end
 
   # GET /postarticles/new
@@ -77,6 +78,10 @@ class PostarticlesController < ApplicationController
          .order("votes.created_at DESC")
   end
 
+  def current_spot
+   @current_spot ||= Spot.find(session[:spot_id]) if session[:spot_id]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_postarticle
@@ -85,6 +90,6 @@ class PostarticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def postarticle_params
-      params.require(:postarticle).permit(:user_id, :spot_id, :title, :content)
+      params.require(:postarticle).permit(:user_id, :spot_id, :title, :content ,:post_image)
     end
 end

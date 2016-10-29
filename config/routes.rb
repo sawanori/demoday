@@ -29,10 +29,15 @@ Rails.application.routes.draw do
   resources :users, only:[:index]
   resources :spots do
    resources :postarticles
+   member {patch "like", "unlike"}
+   collection {get "spot_voted"}
   end
+   post 'spots/pay' => 'spots#pay'
   resources :relationships, only:[:create, :destroy]
   resources :account, only: [:show, :edit, :update]
   get 'inquiry' => 'inquiry#index'
   post 'inquiry/confirm' => 'inquiry#confirm'
   post 'inquiry/thanks' => 'inquiry#thanks'
+
+
 end

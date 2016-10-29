@@ -1,0 +1,10 @@
+<p>■お気に入り</p>
+<p class="vote">
+  <% @spot.spot_voters.order("spot_votes.created_at").each do |spot_votes| %>
+   <%= spot_votes.name %>
+
+  <% end %>
+  <% if current_user && current_user.spot_votable_for?(@spot) %>
+   <%= link_to "■いいね", [:like, @spot], method: :patch, class: "button" %>
+  <% end %>
+</p>

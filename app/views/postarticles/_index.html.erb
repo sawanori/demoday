@@ -1,33 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>体験談</h1>
+<h1 class="class: 'btn bg-danger btn-lg btn-block'">体験談</h1>
 
 <table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Spot</th>
-      <th>Title</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
-
+  <div class="row">
     <% @postarticles.each do |postarticle| %>
 
-      <tr>
-        <td><%= postarticle.user.name %></td>
-        <td><%= postarticle.spot.title %></td>
 
-        <td><%= postarticle.content %></td>
-        <td><%= link_to 'Show', spot_postarticle_url(postarticle.spot, postarticle) %></td>
-        <td><%= link_to 'Edit', edit_spot_postarticle_path(postarticle.spot, postarticle) %></td>
-        <td><%= link_to 'Destroy', spot_postarticle_path(postarticle.spot, postarticle), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="col-xs-6 col-md-3">
+        <div class="thumbnail">
+
+          <div class="caption">
+            <%= image_tag postarticle.post_image.thumb.url %>
+            <small><%= postarticle.user.name %></small>
+            <p><%= postarticle.title %></p>
+            <p><%= link_to 'Show', spot_postarticle_url(postarticle.spot, postarticle) %></p>
+          </div>
+        </div>
+      </div>
+
+
+
     <% end %>
+      </div>
   </tbody>
+  <%= paginate @postarticles %>
 </table>
 
 <br>

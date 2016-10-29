@@ -12,12 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <% if @postarticle.post_image? %>
+    <div class="thumbnail">
+      <%= image_tag @postarticles.post_image.url %>
+    </div>
+    <% end %><br>
+    <%= f.label :post_image %><br>
+    <%= f.file_field :post_image%>
+    <%= f.hidden_field :post_image_cache %>
+  </div>
+
+
+
+
+
+
+
+  <div class="field">
+    <%= f.hidden_field :user_id %>
   </div>
   <div class="field">
-    <%= f.label :spot_id %><br>
-    <%= f.text_field :spot_id %>
+
+    <%= f.hidden_field :spot_id %>
   </div>
   <div class="field">
     <%= f.label :title %><br>

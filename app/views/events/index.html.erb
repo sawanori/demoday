@@ -1,39 +1,47 @@
 <p id="notice"><%= notice %></p>
+<div class="container event_index">
 
+   <div class="row center_column">
 <h1>寺で一緒に修行しよう</h1>
+<div class="btn btn-primary btn-lg btn-block" role="button">
 <%= link_to 'イベントを作成', new_event_path %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>修行テーマ</th>
-      <th>説明</th>
-      <th>料金</th>
-      <th>定員</th>
-      <th>作成者</th>
-      <th>場所</th>
-      <th>日時</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= image_tag event.event_image.url %></td>
-        <td><%= event.event_title %></td>
-        <td><%= event.event_content %></td>
-        <td><%= event.event_charge %></td>
-        <td><%= event.member_count %></td>
-        <td><%= event.user.name %></td>
-        <td><%= event.spot %></td>
-        <td><%= event.event_day %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+
+
+
+
+<div class="row">
+  <tbody class="center_box">
+   <% @events.each do |event| %>
+    <div class="col-sm-12 col-md-12 ">
+
+        <div class="col-xs-6 col-md-6">
+        <%= image_tag event.event_image.url %>
+        </div>
+        <div class="caption col-xs-6 col-md-6">
+
+
+          <p>イベント名:<%= event.event_title %></p>
+          <p>日時<%= event.event_day %></p>
+          <p>説明:<%= event.event_content %></p>
+          <p>費用:<%= event.event_charge %></p>
+          <p>参加人数:<%= event.member_count %>人</p>
+          <p>主催者:<%= event.user.name %></p>
+          <p>場所：<%= event.spot %></p>
+          <%= link_to '詳細を見る', event %>
+          <%= link_to 'Edit', edit_event_path(event) %>
+          <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+
+      </div>
+    </div>
     <% end %>
   </tbody>
-</table>
+</div>
 
-<br>
+      </div>
+
+</div>

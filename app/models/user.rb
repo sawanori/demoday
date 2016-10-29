@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
   has_many :events,  dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :tickets
+
+  has_many :spot_votes, dependent: :destroy
+  has_many :spot_entries, through: :spot_votes, source: :spot
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(provider: auth.provider, uid: auth.uid).first
     unless user
@@ -77,5 +80,9 @@ class User < ActiveRecord::Base
 
   def votable_for?(postarticle)
     postarticle && postarticle.user != self && !votes.exists?(postarticle_id: postarticle.id)
+  end
+
+  def spot_votable_for?(spot)
+    spot != self && !spot_votes.exists?(spot_id: spot.id)
   end
 end

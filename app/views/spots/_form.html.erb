@@ -36,21 +36,22 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  <div class="sect">
+    <%= f.label :sect %><br>
+    <%= f.text_area :sect %>
+  </div>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :charge %><br>
-    <%= f.number_field :charge %>
-  </div>
+
   <div class="field">
     <%= f.label :place %><br>
     <%= f.text_area :place %>
   </div>
   <div class="field">
     <%= f.label :phone %><br>
-    <%= f.number_field :phone %>
+    <%= f.telephone_field :phone %>
   </div>
 
   <div class="actions">

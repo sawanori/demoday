@@ -1,22 +1,25 @@
 <p id="notice"><%= notice %></p>
-
+<h2><%= @postarticle.spot.title %></h2>
+<h4>パワースポット体験談</h4>
+<div>
+<%= link_to "スポットの紹介に戻る", spot_path(params[:id]) %>
+</div>
+<div>
+<%= @postarticle.created_at %>
+</div>
+<%= image_tag @postarticle.post_image.url %>
 <p>
-  <strong>User:</strong>
+  <strong>投稿者:</strong>
   <%= @postarticle.user.name %>
 </p>
 
 <p>
-  <strong>Spot:</strong>
-  <%= @postarticle.spot.title %>
-</p>
-
-<p>
-  <strong>Title:</strong>
+  <strong>タイトル:</strong>
   <%= @postarticle.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+
   <%= @postarticle.content %>
 </p>
 

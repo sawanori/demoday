@@ -55,3 +55,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'rails_12factor', group: :production
 gem 'bxslider-rails', '~> 4.2', '>= 4.2.5.1'
+gem 'webpay', '~> 3.2', '>= 3.2.3'
+gem 'kaminari'
+gem "ransack"
+gem 'nokogiri'

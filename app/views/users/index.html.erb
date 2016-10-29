@@ -15,6 +15,24 @@
   </table>
 </section>
 
+<div>
+  <p>あなたが説いた体験談</p>
+<% @user.each do |f| %>
+<%= f.id %>
+<%= f.title %>
+<%= f.content %>
+<%= link_to "詳細を見る", postarticle_path(current_user)%>
+<% end %>
+</div>
+
+<div>
+  <p>参加予定のイベント</p>
+
+</div>
+
+
+
+
 <h2>フォロワー</h2>
 <% @users.each do |user| %>
 <div class="thumbnail">

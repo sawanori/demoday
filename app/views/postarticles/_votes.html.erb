@@ -1,6 +1,12 @@
 <p class="vote">
+  <p class="vote">
+    <% @postarticle.voters.order("votes.created_at").each do |voter| %>
+     ⭐︎<%= voter.name %>
+    <% end %>
 
-  <% if current_user && current_user.votable_for?(@user) %>
-   <%= link_to "⭐︎いいね", [:like, @postarticle], method: :patch, class: "button" %>
+  </p>
+
+  <% if current_user  %>
+ <div class="btn btn-primary btn-lg btn-block" role="button"><%= link_to "⭐︎いいね", [:like, @postarticle], method: :patch, class: "button" %></div>
   <% end %>
 </p>
